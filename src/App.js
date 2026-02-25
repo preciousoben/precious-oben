@@ -145,7 +145,7 @@ function useInView(threshold = 0.1) {
     );
     if (ref.current) obs.observe(ref.current);
     return () => obs.disconnect();
-  }, []);
+  }, [threshold]);
   return [ref, inView];
 }
 
@@ -294,7 +294,6 @@ function CaseStudy({ project, onClose }) {
 
 // ─── MAIN COMPONENT ───────────────────────────────────────────────────────────
 export default function PreciousOben() {
-  const [scrolled,       setScrolled]       = useState(false);
   const [menuOpen,       setMenuOpen]       = useState(false);
   const [contactOpen,    setContactOpen]    = useState(false);
   const [formData,       setFormData]       = useState({ email: "", subject: "", body: "" });
@@ -303,12 +302,6 @@ export default function PreciousOben() {
   const [showAll,        setShowAll]        = useState(false);
 
   const visibleProjects = showAll ? PROJECTS : PROJECTS.slice(0, 4);
-
-  useEffect(() => {
-    const fn = () => setScrolled(window.scrollY > 40);
-    window.addEventListener("scroll", fn);
-    return () => window.removeEventListener("scroll", fn);
-  }, []);
 
   const handleSend = () => {
     if (!formData.email || !formData.subject || !formData.body) return;
