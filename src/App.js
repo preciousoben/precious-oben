@@ -542,102 +542,23 @@ export default function PreciousOben() {
       {/* ── HERO ── */}
       <section id="hero" style={{ minHeight: "92vh", display: "flex", flexDirection: "column", justifyContent: "center", padding: "clamp(3rem, 8vw, 6rem) 5vw", maxWidth: "1200px", margin: "0 auto", position: "relative", overflow: "hidden" }}>
 
-        {/* Mobile background pattern - full bleed tiled mini charts */}
-        <div className="show-mobile" style={{ position: "absolute", inset: 0, opacity: 0.035, pointerEvents: "none", userSelect: "none", display: "none" }}>
-          <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-              <pattern id="chartPattern" x="0" y="0" width="120" height="120" patternUnits="userSpaceOnUse">
-                {/* Mini bar chart */}
-                {[18, 28, 14, 32, 22, 26].map((h, i) => (
-                  <rect key={i} x={4 + i * 10} y={40 - h} width="7" height={h} fill="#7EB8A4" rx="0.5" />
-                ))}
-                <line x1="4" y1="40" x2="68" y2="40" stroke="#7EB8A4" strokeWidth="0.5" />
-
-                {/* Mini line chart */}
-                <polyline
-                  points="4,100 18,88 32,92 46,78 60,83 74,70 88,75 102,62"
-                  stroke="#7EB8A4" strokeWidth="1" fill="none"
-                />
-                {[4,18,32,46,60,74,88,102].map((x, i) => {
-                  const ys = [100,88,92,78,83,70,75,62];
-                  return <circle key={i} cx={x} cy={ys[i]} r="1.5" fill="#7EB8A4" />;
-                })}
-
-                {/* Mini scatter dots */}
-                {[[80,20],[90,10],[95,28],[85,35],[100,15],[75,30]].map(([x,y],i) => (
-                  <circle key={i} cx={x} cy={y} r="1.5" fill="#7EB8A4" />
-                ))}
-              </pattern>
-            </defs>
-            <rect width="100%" height="100%" fill="url(#chartPattern)" />
-          </svg>
-        </div>
-
-        {/* Background chart composition */}
-        <div className="hide-mobile" style={{ position: "absolute", right: "-2vw", top: "50%", transform: "translateY(-50%)", width: "52%", height: "85%", opacity: 0.055, pointerEvents: "none", userSelect: "none" }}>
-          <svg viewBox="0 0 520 480" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ width: "100%", height: "100%" }}>
-
-            {/* Bar chart */}
-            <g transform="translate(20, 60)">
-              {[110, 160, 95, 200, 145, 175, 120, 185, 155, 210].map((h, i) => (
-                <rect key={i} x={i * 28} y={220 - h} width={20} height={h} fill="#7EB8A4" rx="1" />
-              ))}
-              {/* X axis */}
-              <line x1="0" y1="220" x2="295" y2="220" stroke="#7EB8A4" strokeWidth="1" />
-              {/* Y axis */}
-              <line x1="0" y1="0" x2="0" y2="220" stroke="#7EB8A4" strokeWidth="1" />
-              {/* Y gridlines */}
-              {[55, 110, 165].map(y => (
-                <line key={y} x1="0" y1={220 - y} x2="295" y2={220 - y} stroke="#7EB8A4" strokeWidth="0.5" strokeDasharray="4 4" />
-              ))}
-            </g>
-
-            {/* Line chart */}
-            <g transform="translate(20, 310)">
-              <polyline
-                points="0,90 40,65 80,75 120,40 160,55 200,25 240,38 280,15 320,28 360,10"
-                stroke="#7EB8A4" strokeWidth="1.5" fill="none" strokeLinejoin="round"
-              />
-              {/* Area fill */}
-              <polyline
-                points="0,110 0,90 40,65 80,75 120,40 160,55 200,25 240,38 280,15 320,28 360,10 360,110"
-                fill="#7EB8A4" fillOpacity="0.15"
-              />
-              {/* Data points */}
-              {[[0,90],[40,65],[80,75],[120,40],[160,55],[200,25],[240,38],[280,15],[320,28],[360,10]].map(([x,y],i) => (
-                <circle key={i} cx={x} cy={y} r="3" fill="#7EB8A4" />
-              ))}
-              <line x1="0" y1="110" x2="370" y2="110" stroke="#7EB8A4" strokeWidth="1" />
-            </g>
-
-            {/* Scatter plot dots top right */}
-            <g transform="translate(320, 40)">
-              {[
-                [10,80],[30,40],[50,90],[70,30],[90,60],[15,110],[45,55],[75,100],[25,20],[60,70],
-                [80,45],[35,85],[55,25],[20,65],[65,95],[40,15],[85,75],[5,50],[50,40],[70,105],
-              ].map(([x,y],i) => (
-                <circle key={i} cx={x} cy={y} r="2.5" fill="#7EB8A4" />
-              ))}
-              {/* Trend line */}
-              <line x1="0" y1="115" x2="95" y2="10" stroke="#7EB8A4" strokeWidth="1" strokeDasharray="3 3" />
-            </g>
-
-            {/* Small donut chart */}
-            <g transform="translate(360, 220)">
-              <circle cx="50" cy="50" r="38" stroke="#7EB8A4" strokeWidth="10" fill="none" strokeDasharray="150 89" strokeDashoffset="0" />
-              <circle cx="50" cy="50" r="38" stroke="#F5F0E8" strokeWidth="10" fill="none" strokeDasharray="89 150" strokeDashoffset="-150" opacity="0.3" />
-            </g>
-
-            {/* Horizontal bar chart small */}
-            <g transform="translate(330, 340)">
-              {[160, 120, 190, 90, 140].map((w, i) => (
-                <g key={i}>
-                  <rect x="0" y={i * 18} width={w * 0.9} height="12" fill="#7EB8A4" rx="1" />
-                </g>
-              ))}
-              <line x1="0" y1="0" x2="0" y2="90" stroke="#7EB8A4" strokeWidth="1" />
-            </g>
-
+        {/* Background - single rising line chart */}
+        <div style={{ position: "absolute", inset: 0, opacity: 0.06, pointerEvents: "none", userSelect: "none" }}>
+          <svg width="100%" height="100%" viewBox="0 0 1200 500" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+            {/* Area fill under line */}
+            <polyline
+              points="0,480 80,460 160,450 240,420 320,400 400,370 480,340 560,300 640,280 720,250 800,210 880,175 960,140 1040,100 1120,70 1200,40 1200,500 0,500"
+              fill="#7EB8A4" fillOpacity="0.08"
+            />
+            {/* Main line */}
+            <polyline
+              points="0,480 80,460 160,450 240,420 320,400 400,370 480,340 560,300 640,280 720,250 800,210 880,175 960,140 1040,100 1120,70 1200,40"
+              stroke="#7EB8A4" strokeWidth="1.5" fill="none" strokeLinejoin="round"
+            />
+            {/* Data points */}
+            {[[0,480],[160,450],[320,400],[480,340],[640,280],[800,210],[960,140],[1120,70],[1200,40]].map(([x,y],i) => (
+              <circle key={i} cx={x} cy={y} r="3" fill="#7EB8A4" />
+            ))}
           </svg>
         </div>
 
