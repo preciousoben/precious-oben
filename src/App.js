@@ -471,7 +471,8 @@ export default function PreciousOben() {
         /* All mobile nav */
         @media (max-width: 640px) {
           .hide-mobile { display: none !important; }
-          .show-mobile { display: flex !important; }
+          .show-mobile { display: block !important; }
+          button.show-mobile { display: flex !important; }
         }
 
         /* Impact grid on small screens */
@@ -540,6 +541,37 @@ export default function PreciousOben() {
 
       {/* ── HERO ── */}
       <section id="hero" style={{ minHeight: "92vh", display: "flex", flexDirection: "column", justifyContent: "center", padding: "clamp(3rem, 8vw, 6rem) 5vw", maxWidth: "1200px", margin: "0 auto", position: "relative", overflow: "hidden" }}>
+
+        {/* Mobile background pattern - full bleed tiled mini charts */}
+        <div className="show-mobile" style={{ position: "absolute", inset: 0, opacity: 0.035, pointerEvents: "none", userSelect: "none", display: "none" }}>
+          <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <pattern id="chartPattern" x="0" y="0" width="120" height="120" patternUnits="userSpaceOnUse">
+                {/* Mini bar chart */}
+                {[18, 28, 14, 32, 22, 26].map((h, i) => (
+                  <rect key={i} x={4 + i * 10} y={40 - h} width="7" height={h} fill="#7EB8A4" rx="0.5" />
+                ))}
+                <line x1="4" y1="40" x2="68" y2="40" stroke="#7EB8A4" strokeWidth="0.5" />
+
+                {/* Mini line chart */}
+                <polyline
+                  points="4,100 18,88 32,92 46,78 60,83 74,70 88,75 102,62"
+                  stroke="#7EB8A4" strokeWidth="1" fill="none"
+                />
+                {[4,18,32,46,60,74,88,102].map((x, i) => {
+                  const ys = [100,88,92,78,83,70,75,62];
+                  return <circle key={i} cx={x} cy={ys[i]} r="1.5" fill="#7EB8A4" />;
+                })}
+
+                {/* Mini scatter dots */}
+                {[[80,20],[90,10],[95,28],[85,35],[100,15],[75,30]].map(([x,y],i) => (
+                  <circle key={i} cx={x} cy={y} r="1.5" fill="#7EB8A4" />
+                ))}
+              </pattern>
+            </defs>
+            <rect width="100%" height="100%" fill="url(#chartPattern)" />
+          </svg>
+        </div>
 
         {/* Background chart composition */}
         <div className="hide-mobile" style={{ position: "absolute", right: "-2vw", top: "50%", transform: "translateY(-50%)", width: "52%", height: "85%", opacity: 0.055, pointerEvents: "none", userSelect: "none" }}>
