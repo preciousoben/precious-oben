@@ -44,10 +44,10 @@ const SERVICES = [
 ];
 
 const SKILLS = [
-  { category: "Analytics & BI",               items: ["SQL", "Python", "Power BI", "Tableau", "Looker", "MS Excel"] },
-  { category: "Data Engineering & Pipelines", items: ["dbt", "ETL Pipelines", "BigQuery", "KNIME Analytics", "Cloud Functions", "Cloud Scheduling"] },
-  { category: "Automation & Integration",     items: ["Power Automate", "Vertex AI", "Dynamics 365", "Odoo", "ServiceNow"] },
-  { category: "Data Platforms & Storage",     items: ["MySQL", "Google Cloud Platform", "ERP Systems", "Data Migration", "Git"] },
+  { category: "Analytics & BI",               items: ["SQL", "Python", "Power BI", "Tableau", "Looker", "Looker Studio", "MS Excel", "Data Visualization", "Dashboard Development", "A/B Testing"] },
+  { category: "Data Engineering & Pipelines", items: ["dbt", "ETL Pipelines", "BigQuery", "Snowflake", "Data Warehousing", "KNIME Analytics", "Cloud Functions", "Cloud Scheduling", "Medallion Architecture"] },
+  { category: "Data Quality & Modeling",      items: ["Data Quality", "Data Cleaning", "Anomaly Detection", "Data Modeling", "Automated Testing", "Data Governance", "Data Migration"] },
+  { category: "Automation & Integration",     items: ["Power Automate", "Vertex AI", "Dynamics 365", "Odoo", "ServiceNow", "MySQL", "Google Cloud Platform", "Git"] },
 ];
 
 const PROJECTS = [
@@ -57,7 +57,7 @@ const PROJECTS = [
     client: "Fintech / Crypto App",
     tags: ["BigQuery", "Python", "Looker Studio", "SQL", "Medallion Architecture"],
     summary:
-      "Built an end-to-end analytics pipeline for a newly launched P2P payment feature, from synthetic data generation and anomaly handling to a live executive dashboard tracking $729K in transaction volume.",
+      "Built an end-to-end analytics pipeline for a newly launched P2P payment feature, covering data generation, data cleaning, anomaly detection, data quality checks, and dashboard development tracking $729K in transaction volume.",
     impact: [
       { value: "$729K", label: "USD volume tracked" },
       { value: "90.2%", label: "Transaction success rate" },
@@ -65,9 +65,9 @@ const PROJECTS = [
     ],
     detail: `The brief: a P2P payment feature had just launched inside a fintech app. The goal was to build and validate the entire analytics pipeline, from raw noisy data through to trusted metrics and executive reporting.
 
-The first step was generating realistic synthetic data using Python: approximately 1,000 users, 5,000 transactions, and 10,000 app events across one month. The data was intentionally imperfect, introducing real-world anomalies including transactions timestamped before user signup, duplicate transaction IDs caused by network retry logic, and NULL values in critical fields. This stress-tested the pipeline against the kinds of issues that appear in production environments.
+The first step was generating realistic synthetic data using Python: approximately 1,000 users, 5,000 transactions, and 10,000 app events across one month. The data was intentionally imperfect, introducing real-world anomalies including transactions timestamped before user signup, duplicate transaction IDs caused by network retry logic, and NULL values in critical fields. This anomaly detection and data quality validation layer stress-tested the pipeline against the kinds of issues that appear in production environments.
 
-The pipeline was built on BigQuery using a two-layer medallion architecture: a raw dataset ingesting the source data as-is, and a clean dataset populated through SQL transformation queries that identified, documented, and resolved each anomaly. KPIs were calculated using CTEs rather than views, keeping the logic transparent and auditable. The clean data was then connected directly to Looker Studio for visualisation.
+The pipeline was built on BigQuery using a two-layer medallion architecture for data warehousing: a raw dataset ingesting the source data as-is, and a clean dataset populated through SQL transformation queries that performed data cleaning, documented each anomaly, and resolved them systematically. Data modeling was handled via CTEs rather than views, keeping the logic transparent and auditable. Automated testing was applied to validate row counts, null rates, and referential integrity before data was promoted to the clean layer. The clean data was then connected directly to Looker Studio for dashboard development and visualisation.
 
 The final dashboard tracked total USD volume transacted, daily active users, average transactions per user, transaction status distribution, and feature adoption rates. Key findings included a 90.2% transaction success rate, an end-of-month volume spike indicating growing feature traction, and a 38.22% feature adoption rate among active app users, with a strategic recommendation on whether to scale the feature based on the data.`,
     images: ["/dashboard-p2p.png"],
@@ -86,9 +86,9 @@ The final dashboard tracked total USD volume transacted, daily active users, ave
     ],
     detail: `The client's analytics team was spending two full working days every week manually pulling, cleaning, and formatting data for executive reporting. The process was error-prone, undocumented, and impossible to scale. The core business need was to understand how users interacted with their website and social channels, and what behaviours were actually driving conversions.
 
-I designed and built an end-to-end automated reporting pipeline using Python for ingestion, dbt for transformation with automated data quality checks across a 3-layer architecture covering raw staging, business logic, and mart layers.
+I designed and built an end-to-end automated reporting pipeline using Python for ingestion and data cleaning, dbt for data modeling and transformation across a 3-layer architecture covering raw staging, business logic, and mart layers. Automated testing and data quality checks were built into every layer, flagging anomalies and schema drift before bad data could reach the dashboard.
 
-The final output was a multi-page Power BI dashboard covering an Executive Overview, Social Media deep dive, and Website Analytics. Key results surfaced by the dashboard: 500 total users generating 8,822 social engagements and 27,302 conversion events at a 2.75% conversion rate. LinkedIn drove 48.84% of social engagement. Africa led user distribution across regions. Afternoon and evening were the highest-traffic windows by page views, with 18,221 and 18,198 respectively. Conversions showed consistent growth from July through September before plateauing, giving the client a clear signal on where to focus acquisition efforts. What took 2 days now runs in under 4 hours with zero manual intervention.`,
+The final output was a multi-page Power BI dashboard covering an Executive Overview, Social Media deep dive, and Website Analytics — delivering full dashboard development from raw source to executive-ready visualisation. Key results: 500 total users generating 8,822 social engagements and 27,302 conversion events at a 2.75% conversion rate. LinkedIn drove 48.84% of social engagement. Africa led user distribution across regions. Afternoon and evening were the highest-traffic windows by page views, with 18,221 and 18,198 respectively. Conversions showed consistent growth from July through September before plateauing, giving the client a clear signal on where to focus acquisition efforts. What took 2 days now runs in under 4 hours with zero manual intervention.`,
     images: ["/dashboard-saas.png"],
   },
   {
@@ -105,9 +105,9 @@ The final output was a multi-page Power BI dashboard covering an Executive Overv
     ],
     detail: `This project simulates a real-world staffing challenge for a chat support team spread across multiple international call centres. The objective was to optimise agent schedules to meet a strict SLA target of responding to 80% of inbound chats within 30 seconds, without increasing headcount.
 
-The analysis involved cleaning and merging multi-source datasets, evaluating staffing inefficiencies across time zones and days of the week, and building predictive models using Python to identify optimal staffing levels per hour. Heatmaps of response times against inbound volume revealed clear understaffing windows that were not visible in the raw data.
+The analysis involved data cleaning and merging of multi-source datasets, anomaly detection across timestamp and volume fields, and evaluating staffing inefficiencies across time zones and days of the week. Predictive models were built using Python and Scikit-learn to identify optimal staffing levels per hour. Data visualization through heatmaps of response times against inbound volume revealed clear understaffing windows that were not visible in the raw data.
 
-Power BI was used to visualise key metrics including average response time, agent distribution by day, and chat volume patterns through KPI cards, line charts, and a response time heatmap. A strategic investment memo and 4-phase rollout plan were developed alongside the dashboard to support leadership decision-making.`,
+Power BI was used for dashboard development covering key metrics including average response time, agent distribution by day, and chat volume patterns through KPI cards, line charts, and a response time heatmap. A strategic investment memo and 4-phase rollout plan were developed alongside the dashboard to support leadership decision-making.`,
     images: ["/dashboard-callcenter.png"],
   },
   {
@@ -123,13 +123,13 @@ Power BI was used to visualise key metrics including average response time, agen
       { value: "70%",  label: "Of flagged incidents were avoidable" },
       { value: "0",    label: "Data loss incidents" },
     ],
-    detail: `The engagement involved migrating over 50,000 user records from Microsoft Dynamics 365 HR to Microsoft Dynamics 365 Finance and Operations. My role covered end-to-end field mapping and validation between both systems, carried out in the UAT environment before any changes were pushed to production.
+    detail: `The engagement involved migrating over 50,000 user records from Microsoft Dynamics 365 HR to Microsoft Dynamics 365 Finance and Operations. My role covered end-to-end field mapping, data validation, and data quality checks between both systems, carried out in the UAT environment before any changes were pushed to production.
 
 Before the migration could proceed, a pre-existing problem had to be addressed. There were recurring data mismatches in the Finance and Operations system that diverged from the gold standard held in the HR system. These mismatches were responsible for 70% of the workflow incidents being flagged in ServiceNow. The majority were entirely avoidable and were consuming significant IT team capacity that should have been directed elsewhere.
 
-Fixing this before the merge was critical, both for data integrity and for GDPR compliance. To make the case to non-technical stakeholders, I visualised three months of incident data, isolating and highlighting the recurring mismatches in a business review. This gave leadership a clear picture of the volume, pattern, and timeline impact of the issue, and secured the alignment needed to resolve it before proceeding.
+Fixing this before the merge was critical, both for data integrity and for GDPR compliance. To make the case to non-technical stakeholders, I used data visualization to present three months of incident data, isolating and highlighting the recurring mismatches in a business review. This gave leadership a clear picture of the volume, pattern, and timeline impact of the issue, and secured the alignment needed to resolve it before proceeding.
 
-With the data quality issues addressed, I wrote UAT test scripts covering key functionalities in the production environment to ensure that end users of the affected areas would experience no disruption post-migration, and to surface any issues before they reached those users. The migration completed with zero data loss incidents and in full compliance with GDPR.`,
+With the data quality issues addressed, I wrote UAT test scripts covering key functionalities in the production environment to ensure that end users of the affected areas would experience no disruption post-migration, and to surface any issues before they reached those users. The data migration completed with zero data loss incidents and in full compliance with GDPR.`,
     images: [],
   },
 ];
@@ -523,8 +523,77 @@ export default function PreciousOben() {
       </nav>
 
       {/* ── HERO ── */}
-      <section id="hero" style={{ minHeight: "92vh", display: "flex", flexDirection: "column", justifyContent: "center", padding: "clamp(3rem, 8vw, 6rem) 5vw", maxWidth: "1200px", margin: "0 auto" }}>
-        <div style={{ opacity: 0, animation: "fadeUp 0.9s ease 0.1s forwards" }}>
+      <section id="hero" style={{ minHeight: "92vh", display: "flex", flexDirection: "column", justifyContent: "center", padding: "clamp(3rem, 8vw, 6rem) 5vw", maxWidth: "1200px", margin: "0 auto", position: "relative", overflow: "hidden" }}>
+
+        {/* Background chart composition */}
+        <div className="hide-mobile" style={{ position: "absolute", right: "-2vw", top: "50%", transform: "translateY(-50%)", width: "52%", height: "85%", opacity: 0.055, pointerEvents: "none", userSelect: "none" }}>
+          <svg viewBox="0 0 520 480" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ width: "100%", height: "100%" }}>
+
+            {/* Bar chart */}
+            <g transform="translate(20, 60)">
+              {[110, 160, 95, 200, 145, 175, 120, 185, 155, 210].map((h, i) => (
+                <rect key={i} x={i * 28} y={220 - h} width={20} height={h} fill="#7EB8A4" rx="1" />
+              ))}
+              {/* X axis */}
+              <line x1="0" y1="220" x2="295" y2="220" stroke="#7EB8A4" strokeWidth="1" />
+              {/* Y axis */}
+              <line x1="0" y1="0" x2="0" y2="220" stroke="#7EB8A4" strokeWidth="1" />
+              {/* Y gridlines */}
+              {[55, 110, 165].map(y => (
+                <line key={y} x1="0" y1={220 - y} x2="295" y2={220 - y} stroke="#7EB8A4" strokeWidth="0.5" strokeDasharray="4 4" />
+              ))}
+            </g>
+
+            {/* Line chart */}
+            <g transform="translate(20, 310)">
+              <polyline
+                points="0,90 40,65 80,75 120,40 160,55 200,25 240,38 280,15 320,28 360,10"
+                stroke="#7EB8A4" strokeWidth="1.5" fill="none" strokeLinejoin="round"
+              />
+              {/* Area fill */}
+              <polyline
+                points="0,110 0,90 40,65 80,75 120,40 160,55 200,25 240,38 280,15 320,28 360,10 360,110"
+                fill="#7EB8A4" fillOpacity="0.15"
+              />
+              {/* Data points */}
+              {[[0,90],[40,65],[80,75],[120,40],[160,55],[200,25],[240,38],[280,15],[320,28],[360,10]].map(([x,y],i) => (
+                <circle key={i} cx={x} cy={y} r="3" fill="#7EB8A4" />
+              ))}
+              <line x1="0" y1="110" x2="370" y2="110" stroke="#7EB8A4" strokeWidth="1" />
+            </g>
+
+            {/* Scatter plot dots top right */}
+            <g transform="translate(320, 40)">
+              {[
+                [10,80],[30,40],[50,90],[70,30],[90,60],[15,110],[45,55],[75,100],[25,20],[60,70],
+                [80,45],[35,85],[55,25],[20,65],[65,95],[40,15],[85,75],[5,50],[50,40],[70,105],
+              ].map(([x,y],i) => (
+                <circle key={i} cx={x} cy={y} r="2.5" fill="#7EB8A4" />
+              ))}
+              {/* Trend line */}
+              <line x1="0" y1="115" x2="95" y2="10" stroke="#7EB8A4" strokeWidth="1" strokeDasharray="3 3" />
+            </g>
+
+            {/* Small donut chart */}
+            <g transform="translate(360, 220)">
+              <circle cx="50" cy="50" r="38" stroke="#7EB8A4" strokeWidth="10" fill="none" strokeDasharray="150 89" strokeDashoffset="0" />
+              <circle cx="50" cy="50" r="38" stroke="#F5F0E8" strokeWidth="10" fill="none" strokeDasharray="89 150" strokeDashoffset="-150" opacity="0.3" />
+            </g>
+
+            {/* Horizontal bar chart small */}
+            <g transform="translate(330, 340)">
+              {[160, 120, 190, 90, 140].map((w, i) => (
+                <g key={i}>
+                  <rect x="0" y={i * 18} width={w * 0.9} height="12" fill="#7EB8A4" rx="1" />
+                </g>
+              ))}
+              <line x1="0" y1="0" x2="0" y2="90" stroke="#7EB8A4" strokeWidth="1" />
+            </g>
+
+          </svg>
+        </div>
+
+        <div style={{ opacity: 0, animation: "fadeUp 0.9s ease 0.1s forwards", position: "relative", zIndex: 1 }}>
           <h1 style={{ fontSize: "clamp(4rem, 10vw, 8rem)", fontWeight: 300, lineHeight: 1.0, letterSpacing: "-0.025em", color: C.cream }}>
             Precious<br />
             <span style={{ fontStyle: "italic", color: C.sage }}>Oben</span>
@@ -544,6 +613,7 @@ export default function PreciousOben() {
           marginTop: "6rem", display: "grid",
           gridTemplateColumns: "repeat(4, auto)", gap: "3.5rem",
           justifyContent: "start", opacity: 0, animation: "fadeUp 0.9s ease 0.5s forwards",
+          position: "relative", zIndex: 1,
         }}>
           {[
             ["$729K",  "P2P volume tracked"],
