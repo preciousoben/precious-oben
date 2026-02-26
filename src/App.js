@@ -303,10 +303,26 @@ export default function PreciousOben() {
 
   const visibleProjects = showAll ? PROJECTS : PROJECTS.slice(0, 4);
 
-  const handleSend = () => {
+  const handleSend = async () => {
     if (!formData.email || !formData.subject || !formData.body) return;
-    setSent(true);
-    setTimeout(() => { setSent(false); setFormData({ email: "", subject: "", body: "" }); setContactOpen(false); }, 3000);
+    try {
+      const res = await fetch("https://formspree.io/f/xreajazj", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", "Accept": "application/json" },
+        body: JSON.stringify({
+          email: formData.email,
+          subject: formData.subject,
+          message: formData.body,
+          _replyto: formData.email,
+        }),
+      });
+      if (res.ok) {
+        setSent(true);
+        setTimeout(() => { setSent(false); setFormData({ email: "", subject: "", body: "" }); setContactOpen(false); }, 3000);
+      }
+    } catch (err) {
+      console.error("Form submission error:", err);
+    }
   };
 
   const scrollTo = (id) => document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
@@ -526,21 +542,21 @@ export default function PreciousOben() {
       <section id="hero" style={{ minHeight: "92vh", display: "flex", flexDirection: "column", justifyContent: "center", padding: "clamp(3rem, 8vw, 6rem) 5vw", maxWidth: "1200px", margin: "0 auto", position: "relative", overflow: "hidden" }}>
 
         {/* Background chart composition */}
-        <div className="hide-mobile" style={{ position: "absolute", right: "-2vw", top: "50%", transform: "translateY(-50%)", width: "52%", height: "85%", opacity: 0.055, pointerEvents: "none", userSelect: "none" }}>
+        <div className="hide-mobile" style={{ position: "absolute", left: "25%", right: "-2vw", top: "50%", transform: "translateY(-50%)", height: "90%", opacity: 0.5, pointerEvents: "none", userSelect: "none" }}>
           <svg viewBox="0 0 520 480" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ width: "100%", height: "100%" }}>
 
             {/* Bar chart */}
             <g transform="translate(20, 60)">
               {[110, 160, 95, 200, 145, 175, 120, 185, 155, 210].map((h, i) => (
-                <rect key={i} x={i * 28} y={220 - h} width={20} height={h} fill="#7EB8A4" rx="1" />
+                <rect key={i} x={i * 28} y={220 - h} width={20} height={h} fill="#3A3A3A" rx="1" />
               ))}
               {/* X axis */}
-              <line x1="0" y1="220" x2="295" y2="220" stroke="#7EB8A4" strokeWidth="1" />
+              <line x1="0" y1="220" x2="295" y2="220" stroke="#3A3A3A" strokeWidth="1" />
               {/* Y axis */}
-              <line x1="0" y1="0" x2="0" y2="220" stroke="#7EB8A4" strokeWidth="1" />
+              <line x1="0" y1="0" x2="0" y2="220" stroke="#3A3A3A" strokeWidth="1" />
               {/* Y gridlines */}
               {[55, 110, 165].map(y => (
-                <line key={y} x1="0" y1={220 - y} x2="295" y2={220 - y} stroke="#7EB8A4" strokeWidth="0.5" strokeDasharray="4 4" />
+                <line key={y} x1="0" y1={220 - y} x2="295" y2={220 - y} stroke="#3A3A3A" strokeWidth="0.5" strokeDasharray="4 4" />
               ))}
             </g>
 
@@ -548,18 +564,18 @@ export default function PreciousOben() {
             <g transform="translate(20, 310)">
               <polyline
                 points="0,90 40,65 80,75 120,40 160,55 200,25 240,38 280,15 320,28 360,10"
-                stroke="#7EB8A4" strokeWidth="1.5" fill="none" strokeLinejoin="round"
+                stroke="#3A3A3A" strokeWidth="1.5" fill="none" strokeLinejoin="round"
               />
               {/* Area fill */}
               <polyline
                 points="0,110 0,90 40,65 80,75 120,40 160,55 200,25 240,38 280,15 320,28 360,10 360,110"
-                fill="#7EB8A4" fillOpacity="0.15"
+                fill="#3A3A3A" fillOpacity="0.4"
               />
               {/* Data points */}
               {[[0,90],[40,65],[80,75],[120,40],[160,55],[200,25],[240,38],[280,15],[320,28],[360,10]].map(([x,y],i) => (
-                <circle key={i} cx={x} cy={y} r="3" fill="#7EB8A4" />
+                <circle key={i} cx={x} cy={y} r="3" fill="#3A3A3A" />
               ))}
-              <line x1="0" y1="110" x2="370" y2="110" stroke="#7EB8A4" strokeWidth="1" />
+              <line x1="0" y1="110" x2="370" y2="110" stroke="#3A3A3A" strokeWidth="1" />
             </g>
 
             {/* Scatter plot dots top right */}
@@ -568,26 +584,26 @@ export default function PreciousOben() {
                 [10,80],[30,40],[50,90],[70,30],[90,60],[15,110],[45,55],[75,100],[25,20],[60,70],
                 [80,45],[35,85],[55,25],[20,65],[65,95],[40,15],[85,75],[5,50],[50,40],[70,105],
               ].map(([x,y],i) => (
-                <circle key={i} cx={x} cy={y} r="2.5" fill="#7EB8A4" />
+                <circle key={i} cx={x} cy={y} r="2.5" fill="#3A3A3A" />
               ))}
               {/* Trend line */}
-              <line x1="0" y1="115" x2="95" y2="10" stroke="#7EB8A4" strokeWidth="1" strokeDasharray="3 3" />
+              <line x1="0" y1="115" x2="95" y2="10" stroke="#3A3A3A" strokeWidth="1" strokeDasharray="3 3" />
             </g>
 
             {/* Small donut chart */}
             <g transform="translate(360, 220)">
-              <circle cx="50" cy="50" r="38" stroke="#7EB8A4" strokeWidth="10" fill="none" strokeDasharray="150 89" strokeDashoffset="0" />
-              <circle cx="50" cy="50" r="38" stroke="#F5F0E8" strokeWidth="10" fill="none" strokeDasharray="89 150" strokeDashoffset="-150" opacity="0.3" />
+              <circle cx="50" cy="50" r="38" stroke="#3A3A3A" strokeWidth="10" fill="none" strokeDasharray="150 89" strokeDashoffset="0" />
+              <circle cx="50" cy="50" r="38" stroke="#2A2A2A" strokeWidth="10" fill="none" strokeDasharray="89 150" strokeDashoffset="-150" opacity="0.6" />
             </g>
 
             {/* Horizontal bar chart small */}
             <g transform="translate(330, 340)">
               {[160, 120, 190, 90, 140].map((w, i) => (
                 <g key={i}>
-                  <rect x="0" y={i * 18} width={w * 0.9} height="12" fill="#7EB8A4" rx="1" />
+                  <rect x="0" y={i * 18} width={w * 0.9} height="12" fill="#3A3A3A" rx="1" />
                 </g>
               ))}
-              <line x1="0" y1="0" x2="0" y2="90" stroke="#7EB8A4" strokeWidth="1" />
+              <line x1="0" y1="0" x2="0" y2="90" stroke="#3A3A3A" strokeWidth="1" />
             </g>
 
           </svg>
