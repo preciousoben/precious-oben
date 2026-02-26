@@ -540,27 +540,7 @@ export default function PreciousOben() {
       </nav>
 
       {/* ── HERO ── */}
-      <section id="hero" style={{ minHeight: "92vh", display: "flex", flexDirection: "column", justifyContent: "center", padding: "clamp(3rem, 8vw, 6rem) 5vw", maxWidth: "1200px", margin: "0 auto", position: "relative", overflow: "hidden" }}>
-
-        {/* Background - single line chart with natural fluctuation */}
-        <div style={{ position: "absolute", inset: 0, opacity: 0.06, pointerEvents: "none", userSelect: "none" }}>
-          <svg width="100%" height="100%" viewBox="0 0 1200 500" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-            {/* Area fill */}
-            <polyline
-              points="0,320 120,200 240,280 360,260 480,160 600,340 720,180 840,240 960,120 1080,200 1200,100 1200,500 0,500"
-              fill="#7EB8A4" fillOpacity="0.06"
-            />
-            {/* Main line */}
-            <polyline
-              points="0,320 120,200 240,280 360,260 480,160 600,340 720,180 840,240 960,120 1080,200 1200,100"
-              stroke="#7EB8A4" strokeWidth="1.5" fill="none" strokeLinejoin="round"
-            />
-            {/* Data points */}
-            {[[0,320],[120,200],[240,280],[360,260],[480,160],[600,340],[720,180],[840,240],[960,120],[1080,200],[1200,100]].map(([x,y],i) => (
-              <circle key={i} cx={x} cy={y} r="4" fill="#0A0A0A" stroke="#7EB8A4" strokeWidth="1.5" />
-            ))}
-          </svg>
-        </div>
+      <section id="hero" style={{ minHeight: "92vh", display: "flex", flexDirection: "column", justifyContent: "center", padding: "clamp(3rem, 8vw, 6rem) 5vw", maxWidth: "1200px", margin: "0 auto" }}>
 
         <div style={{ opacity: 0, animation: "fadeUp 0.9s ease 0.1s forwards", position: "relative", zIndex: 1 }}>
           <h1 style={{ fontSize: "clamp(4rem, 10vw, 8rem)", fontWeight: 300, lineHeight: 1.0, letterSpacing: "-0.025em", color: C.cream }}>
@@ -582,7 +562,7 @@ export default function PreciousOben() {
           marginTop: "6rem", display: "grid",
           gridTemplateColumns: "repeat(4, auto)", gap: "3.5rem",
           justifyContent: "start", opacity: 0, animation: "fadeUp 0.9s ease 0.5s forwards",
-          position: "relative", zIndex: 1,
+          
         }}>
           {[
             ["$729K",  "P2P volume tracked"],
