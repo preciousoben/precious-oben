@@ -542,22 +542,22 @@ export default function PreciousOben() {
       {/* ── HERO ── */}
       <section id="hero" style={{ minHeight: "92vh", display: "flex", flexDirection: "column", justifyContent: "center", padding: "clamp(3rem, 8vw, 6rem) 5vw", maxWidth: "1200px", margin: "0 auto", position: "relative", overflow: "hidden" }}>
 
-        {/* Background - single rising line chart */}
+        {/* Background - single line chart with natural fluctuation */}
         <div style={{ position: "absolute", inset: 0, opacity: 0.06, pointerEvents: "none", userSelect: "none" }}>
           <svg width="100%" height="100%" viewBox="0 0 1200 500" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-            {/* Area fill under line */}
+            {/* Area fill */}
             <polyline
-              points="0,480 80,460 160,450 240,420 320,400 400,370 480,340 560,300 640,280 720,250 800,210 880,175 960,140 1040,100 1120,70 1200,40 1200,500 0,500"
-              fill="#7EB8A4" fillOpacity="0.08"
+              points="0,320 120,200 240,280 360,260 480,160 600,340 720,180 840,240 960,120 1080,200 1200,100 1200,500 0,500"
+              fill="#7EB8A4" fillOpacity="0.06"
             />
             {/* Main line */}
             <polyline
-              points="0,480 80,460 160,450 240,420 320,400 400,370 480,340 560,300 640,280 720,250 800,210 880,175 960,140 1040,100 1120,70 1200,40"
+              points="0,320 120,200 240,280 360,260 480,160 600,340 720,180 840,240 960,120 1080,200 1200,100"
               stroke="#7EB8A4" strokeWidth="1.5" fill="none" strokeLinejoin="round"
             />
             {/* Data points */}
-            {[[0,480],[160,450],[320,400],[480,340],[640,280],[800,210],[960,140],[1120,70],[1200,40]].map(([x,y],i) => (
-              <circle key={i} cx={x} cy={y} r="3" fill="#7EB8A4" />
+            {[[0,320],[120,200],[240,280],[360,260],[480,160],[600,340],[720,180],[840,240],[960,120],[1080,200],[1200,100]].map(([x,y],i) => (
+              <circle key={i} cx={x} cy={y} r="4" fill="#0A0A0A" stroke="#7EB8A4" strokeWidth="1.5" />
             ))}
           </svg>
         </div>
