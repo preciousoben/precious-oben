@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react";
+import { Analytics } from '@vercel/analytics/react';
 
 // ─── COLOUR TOKENS ────────────────────────────────────────────────────────────
 const C = {
@@ -591,7 +592,7 @@ export default function PreciousOben() {
             <div style={{ marginTop: "2.5rem", display: "flex", flexDirection: "column", gap: "0.9rem" }}>
               <a href="https://www.linkedin.com/in/preciousoben" target="_blank" rel="noreferrer" className="social-link">LinkedIn ↗</a>
               <a href="https://github.com/preciousoben" target="_blank" rel="noreferrer" className="social-link">GitHub ↗</a>
-              <a href="https://twitter.com/PreTalksData" target="_blank" rel="noreferrer" className="social-link">Twitter ↗</a>
+              <a href="https://twitter.com/NerdOffDuty" target="_blank" rel="noreferrer" className="social-link">Twitter ↗</a>
             </div>
           </FadeIn>
 
@@ -869,9 +870,10 @@ export default function PreciousOben() {
         <div style={{ display: "flex", gap: "2rem" }}>
           <a href="https://www.linkedin.com/in/preciousoben" target="_blank" rel="noreferrer" className="social-link">LinkedIn</a>
           <a href="https://github.com/preciousoben" target="_blank" rel="noreferrer" className="social-link">GitHub</a>
-          <a href="https://twitter.com/PreTalksData" target="_blank" rel="noreferrer" className="social-link">Twitter</a>
+          <a href="https://twitter.com/NerdOffDuty" target="_blank" rel="noreferrer" className="social-link">Twitter</a>
         </div>
       </footer>
+      <Analytics /> 
     </div>
   );
 }
