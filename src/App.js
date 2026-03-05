@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react";
+import { Analytics } from "@vercel/analytics/react";
 
 // ─── COLOUR TOKENS ────────────────────────────────────────────────────────────
 const C = {
@@ -872,6 +873,7 @@ export default function PreciousOben() {
           <a href="https://twitter.com/PreTalksData" target="_blank" rel="noreferrer" className="social-link">Twitter</a>
         </div>
       </footer>
+      <Analytics />
     </div>
   );
 }
